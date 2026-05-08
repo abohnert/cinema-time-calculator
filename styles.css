@@ -105,7 +105,6 @@ h1 {
 }
 
 .table-header {
-  margin-bottom: 0.55rem;
   color: var(--text);
   font-size: 1.2rem;
   font-weight: 700;
