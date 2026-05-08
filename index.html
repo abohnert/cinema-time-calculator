@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cinema Time Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>Cinema Time Calculator</h1>
+
+      <form class="cue-form" novalidate>
+        <section class="offset-section">
+          <div class="offset-row">
+            <label class="offset-label" for="movie-start">Offset time</label>
+            <div class="offset-main">
+              <input
+                id="movie-start"
+                name="movie-start"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="movie-start-help movie-start-message"
+              />
+              <p class="field-help" id="movie-start-help">HH:MM:SS</p>
+              <p class="field-message" id="movie-start-message" aria-live="polite"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="table-section">
+          <div class="table-header" aria-hidden="true">
+            <span></span>
+            <span>Playlist time</span>
+            <span>Clip time</span>
+          </div>
+
+          <div class="group-heading">Quiets</div>
+
+          <div class="cue-row" data-cue>
+            <label class="cue-label" for="quiet-1">Quiet 1</label>
+            <div class="field-main">
+              <input
+                id="quiet-1"
+                name="quiet-1"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="quiet-1-message"
+              />
+              <p class="field-message" id="quiet-1-message" aria-live="polite"></p>
+            </div>
+            <output class="field-output" for="quiet-1">--:--:--</output>
+          </div>
+
+          <div class="cue-row" data-cue>
+            <label class="cue-label" for="quiet-2">Quiet 2</label>
+            <div class="field-main">
+              <input
+                id="quiet-2"
+                name="quiet-2"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="quiet-2-message"
+              />
+              <p class="field-message" id="quiet-2-message" aria-live="polite"></p>
+            </div>
+            <output class="field-output" for="quiet-2">--:--:--</output>
+          </div>
+
+          <div class="cue-row" data-cue>
+            <label class="cue-label" for="quiet-3">Quiet 3</label>
+            <div class="field-main">
+              <input
+                id="quiet-3"
+                name="quiet-3"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="quiet-3-message"
+              />
+              <p class="field-message" id="quiet-3-message" aria-live="polite"></p>
+            </div>
+            <output class="field-output" for="quiet-3">--:--:--</output>
+          </div>
+
+          <hr class="section-rule" />
+
+          <div class="group-heading">Louds</div>
+
+          <div class="cue-row" data-cue>
+            <label class="cue-label" for="loud-1">Loud 1</label>
+            <div class="field-main">
+              <input
+                id="loud-1"
+                name="loud-1"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="loud-1-message"
+              />
+              <p class="field-message" id="loud-1-message" aria-live="polite"></p>
+            </div>
+            <output class="field-output" for="loud-1">--:--:--</output>
+          </div>
+
+          <div class="cue-row" data-cue>
+            <label class="cue-label" for="loud-2">Loud 2</label>
+            <div class="field-main">
+              <input
+                id="loud-2"
+                name="loud-2"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="loud-2-message"
+              />
+              <p class="field-message" id="loud-2-message" aria-live="polite"></p>
+            </div>
+            <output class="field-output" for="loud-2">--:--:--</output>
+          </div>
+
+          <div class="cue-row" data-cue>
+            <label class="cue-label" for="loud-3">Loud 3</label>
+            <div class="field-main">
+              <input
+                id="loud-3"
+                name="loud-3"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="loud-3-message"
+              />
+              <p class="field-message" id="loud-3-message" aria-live="polite"></p>
+            </div>
+            <output class="field-output" for="loud-3">--:--:--</output>
+          </div>
+
+          <hr class="section-rule" />
+
+          <div class="group-heading">Credits</div>
+
+          <div class="cue-row cue-row--single" data-cue>
+            <label class="cue-label" for="early-credits">Early credits</label>
+            <div class="field-main">
+              <input
+                id="early-credits"
+                name="early-credits"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="early-credits-message"
+              />
+              <p class="field-message" id="early-credits-message" aria-live="polite"></p>
+            </div>
+            <output class="field-output" for="early-credits">--:--:--</output>
+          </div>
+
+          <div class="cue-row cue-row--single" data-cue>
+            <label class="cue-label" for="credit-lights">Credit lights</label>
+            <div class="field-main">
+              <input
+                id="credit-lights"
+                name="credit-lights"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="00:00:00"
+                aria-describedby="credit-lights-message"
+              />
+              <p class="field-message" id="credit-lights-message" aria-live="polite"></p>
+            </div>
+            <output class="field-output" for="credit-lights">--:--:--</output>
+          </div>
+        </section>
+      </form>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
