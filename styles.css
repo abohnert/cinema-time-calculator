@@ -190,15 +190,23 @@ textarea {
   }
 
   .offset-row,
-  .table-header,
-  .cue-row {
+  .table-header {
     grid-template-columns: 1fr;
     gap: 0.6rem;
+  }
+
+  .cue-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.55rem 0.7rem;
   }
 
   .offset-label,
   .cue-label {
     padding-top: 0;
+  }
+
+  .cue-label {
+    grid-column: 1 / -1;
   }
 
   .table-header {

@@ -4,6 +4,7 @@ const cueRows = Array.from(document.querySelectorAll("[data-cue]"));
 const cueInputs = cueRows.map((row) => row.querySelector("input"));
 const timeInputs = [movieStartInput, ...cueInputs];
 const emptyOutput = "--:--:--";
+const touchedInputs = new WeakSet();
 
 function parseTimestamp(value) {
   const trimmed = value.trim();
@@ -61,6 +62,14 @@ function normalizeTimestampInput(value) {
   return `${digits.slice(0, 2)}:${digits.slice(2, 4)}:${digits.slice(4)}`;
 }
 
+function hasBeenTouched(input) {
+  return touchedInputs.has(input);
+}
+
+function shouldShowFieldError(input) {
+  return hasBeenTouched(input) && document.activeElement !== input;
+}
+
 function setMovieStartState(message, isInvalid) {
   movieStartInput.parentElement.parentElement.classList.toggle("is-invalid", isInvalid);
   movieStartMessage.textContent = message;
@@ -88,10 +97,11 @@ function setCueValid(row, clipSeconds) {
 
 function updateCalculations() {
   const movieStart = parseTimestamp(movieStartInput.value);
+  const showMovieStartError = movieStart.state === "invalid" && shouldShowFieldError(movieStartInput);
 
   if (movieStart.state === "empty") {
     setMovieStartState("", false);
-  } else if (movieStart.state === "invalid") {
+  } else if (showMovieStartError) {
     setMovieStartState(movieStart.message, true);
   } else {
     setMovieStartState("", false);
@@ -100,6 +110,7 @@ function updateCalculations() {
   cueRows.forEach((row) => {
     const input = row.querySelector("input");
     const cueTime = parseTimestamp(input.value);
+    const showCueError = shouldShowFieldError(input);
 
     if (cueTime.state === "empty") {
       clearCueState(row);
@@ -107,7 +118,11 @@ function updateCalculations() {
     }
 
     if (cueTime.state === "invalid") {
-      setCueInvalid(row, cueTime.message);
+      if (showCueError) {
+        setCueInvalid(row, cueTime.message);
+      } else {
+        clearCueState(row);
+      }
       return;
     }
 
@@ -119,7 +134,11 @@ function updateCalculations() {
     }
 
     if (cueTime.totalSeconds < movieStart.totalSeconds) {
-      setCueInvalid(row, "Cue time cannot be earlier than the movie start.");
+      if (showCueError) {
+        setCueInvalid(row, "Cue time cannot be earlier than offset time.");
+      } else {
+        clearCueState(row);
+      }
       return;
     }
 
@@ -129,6 +148,15 @@ function updateCalculations() {
 
 timeInputs.forEach((input) => {
   input.addEventListener("input", () => {
+    updateCalculations();
+  });
+
+  input.addEventListener("focus", () => {
+    updateCalculations();
+  });
+
+  input.addEventListener("blur", () => {
+    touchedInputs.add(input);
     input.value = normalizeTimestampInput(input.value);
     updateCalculations();
   });
